@@ -133,10 +133,10 @@ foreach ($urls as $url) {
 
     // Set content --------------------------------------------------------
     $content[] = [
-        'title' => $title,
-        'text' => $body,
-        'tags' => $keywords,
-        'url' => $url,
+        'title' => (string)$title,
+        'text' => (string)$body,
+        'tags' => (string)$keywords,
+        'url' => (string)$url,
     ];
 }
 //dd($content);
