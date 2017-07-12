@@ -1,5 +1,5 @@
 /*!
- * SS - Static Search v0.0.1
+ * SS - Static Search v0.0.2
  * https://static-search.github.io/
  *
  * Created by Natan Felles
@@ -21,6 +21,7 @@
             'contentLocation': 'ss/content.json',
             'configLocation': 'ss/config.js',
             'lang': 'en',
+            'contentId': 'ss_content',
             'cacheSeconds': 7200, // 2 hours
             'contextBuffer': 60,
             'contextLength': 60,
@@ -54,14 +55,14 @@
 
             var ss_t_c = 0;
 
-            $('#ss_content').html('<h1 class="text-center text-muted"><i class="glyphicon glyphicon-search"></i></h1>');
+            $('#' + set.contentId).html('<h1 class="text-center text-muted"><i class="glyphicon glyphicon-search"></i></h1>');
 
             var time = {};
             time.start = new Date().getTime();
             time.expires = time.start + 1000 * set.cacheSeconds;
 
             // Get content pages
-            if (!localStorage.getItem('ss.pages') || !localStorage.getItem('ss.lang') || localStorage.getItem('ss.expires') <= time.start) {
+            if (!localStorage.getItem('ss.pages') || !localStorage.getItem('ss.lang') || !localStorage.getItem('ss.config') || localStorage.getItem('ss.expires') <= time.start) {
 
                 if (set.debug === true) {
                     console.log('SS: Getting new data...');
@@ -70,7 +71,7 @@
                 $.when(
                     $.getJSON(set.contentLocation)
                         .fail(function () {
-                            console.log('SS: Content file "' + set.contentLocation + '.json" could not be get.');
+                            console.log('SS: Content file "' + set.contentLocation + '" could not be get.');
                         }),
                     $.getJSON('ss/lang/' + set.lang + '.json')
                         .fail(function () {
@@ -386,7 +387,7 @@
                         }
 
                         if (show_replace) {
-                            out += '<div class="alert alert-info">' + ss.lang[1] + ' <em>' + d + '</em>. ' + ss.lang[2] + ' <a id="ss.config.replaced" class="alert-link">' + d_r + '</a></div>';
+                            out += '<div class="alert alert-info">' + ss.lang[1] + ' <em>' + d + '</em>. ' + ss.lang[2] + ' <a id="ss_replaced" class="alert-link">' + d_r + '</a></div>';
                         }
                         if (c == 1) {
                             out += '<div class="text-muted text-right">' + ss.lang[3];
@@ -529,7 +530,7 @@
                                     }
 
                                     // Start related item
-                                    out += '<a class="ss.config.related list-group-item" data-related="' +
+                                    out += '<a class="ss_related list-group-item" data-related="' +
                                         ss.config.related.searches[i].related +
                                         '">';
 
@@ -638,19 +639,19 @@
                 /**
                  * Set the output
                  */
-                $('#ss_content').html(out);
+                $('#' + set.contentId).html(out);
 
                 /**
                  * Search without check replace words
                  */
-                $('#ss.config.replaced').click(function () {
+                $('#ss_replaced').click(function () {
                     getSS(0, false);
                 });
 
                 /**
                  * Search related words
                  */
-                $('.ss.config.related').click(function () {
+                $('.ss_related').click(function () {
                     $(ss.input).val($(this).data('related'));
                     getSS(0, true);
                 });
@@ -673,8 +674,8 @@
                     console.log(ss);
                 }
 
-                if (getURLP('ss')) {
-                    $(ss.input).val(getURLP('ss'));
+                if (getURLP($(ss.input).attr('name'))) {
+                    $(ss.input).val(getURLP($(ss.input).attr('name')));
                     getSS(0, true);
                 }
 
