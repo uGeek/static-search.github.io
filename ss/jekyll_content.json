@@ -2,6 +2,7 @@
 # Content index for SS in Jekyll
 # Based in https://github.com/jekylltools/jekyll-tipue-search
 layout: null
+permalink: ss/content.json
 ---
 {% capture pages %}
 
