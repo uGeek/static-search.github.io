@@ -17,9 +17,25 @@
 
     $.fn.ss = function (options) {
 
+		/**
+		 * SS Full URL path location. Ex: http://domain.tld/ss/
+		 * @type {string}
+		 */
+		var SSLocation = '';
+		$('script').each(function (k, v) {
+			if (v.src.indexOf('ss.min.js') !== -1) {
+				SSLocation = v.src.replace('ss.min.js', '');
+			}
+			else if (v.src.indexOf('ss.js') !== -1) {
+				SSLocation = v.src.replace('ss.js', '');
+			}
+		});
+
+		//console.log(SSLocation);
+
         var set = $.extend({
-            'contentLocation': 'ss/content.json',
-            'configLocation': 'ss/config.js',
+            'contentLocation': SSLocation + 'content.json',
+            'configLocation': SSLocation + 'config.js',
             'lang': 'en',
             'contentId': 'ss_content',
             'cacheSeconds': 7200, // 2 hours
@@ -73,7 +89,7 @@
                         .fail(function () {
                             console.log('SS: Content file "' + set.contentLocation + '" could not be get.');
                         }),
-                    $.getJSON('ss/lang/' + set.lang + '.json')
+                    $.getJSON(SSLocation + '/lang/' + set.lang + '.json')
                         .fail(function () {
                             console.log('SS: Language file "' + set.lang + '" could not be get.');
                         }),
