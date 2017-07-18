@@ -1,5 +1,5 @@
 /*!
- * SS - Static Search v0.0.2
+ * SS - Static Search v1.0.0
  * https://static-search.github.io/
  *
  * Created by Natan Felles
@@ -10,7 +10,7 @@
  *
  * Released under the MIT license
  *
- * Date: 2017-07-11T10:11Z
+ * Date: 2017-07-18T15:05Z
  */
 
 (function ($) {
@@ -39,16 +39,12 @@
             'lang': 'en',
             'contentId': 'ss_content',
             'cacheSeconds': 7200, // 2 hours
-            'contextBuffer': 60,
-            'contextLength': 60,
-            'contextStart': 90,
             'debug': false,
             'descriptiveWords': 25,
             'highlightTerms': true,
             'minimumLength': 3,
             'newWindow': false,
             'show': 10,
-            'showContext': true,
             'showRelated': true,
             'showTime': true,
             'showTitleCount': true,
@@ -458,20 +454,18 @@
                                 if (found[i].desc) {
                                     var t = found[i].desc;
 
-                                    if (set.showContext) {
-                                        d_w = d.split(' ');
-                                        var s_1 = found[i].desc.toLowerCase().indexOf(d_w[0]);
-                                        if (s_1 > set.contextStart) {
-                                            var t_1 = t.substr(s_1 - set.contextBuffer);
-                                            var s_2 = t_1.indexOf(' ');
-                                            t_1 = t.substr(s_1 - set.contextBuffer + s_2);
-                                            t_1 = $.trim(t_1);
+                                    d_w = d.split(' ');
+                                    var s_1 = found[i].desc.toLowerCase().indexOf(d_w[0]);
+                                    if (s_1 > 90) {
+                                        var t_1 = t.substr(s_1 - 60);
+                                        var s_2 = t_1.indexOf(' ');
+                                        t_1 = t.substr(s_1 - 60 + s_2);
+                                        t_1 = $.trim(t_1);
 
-                                            if (t_1.length > set.contextLength) {
-                                                t = '... ' + t_1;
-                                            }
+                                        if (t_1.length > 60) {
+                                            t = '... ' + t_1;
                                         }
-                                    }
+                                    }                                    
 
                                     if (standard) {
                                         d_w = d.split(' ');

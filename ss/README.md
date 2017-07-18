@@ -59,12 +59,6 @@ Below is an example with all options being commented:
         'contentId': 'ss_content',
         // Amount of seconds the SS should not re-download configuration, language, and content files
         'cacheSeconds': 7200,
-        // TODO
-        'contextBuffer': 60,
-        // TODO
-        'contextLength': 60,
-        // TODO
-        'contextStart': 90,
         // Enables debug mode, showing the score of searches and messages in the browser console
         'debug': false,
         // Maximum number of words to be shown in the descriptive text of each item of results
@@ -77,8 +71,6 @@ Below is an example with all options being commented:
         'newWindow': false,
         // Number of items shown on each result page
         'show': 10,
-        // TODO
-        'showContext': true,
         // Shows the related searches defined in the config.js file
         'showRelated': true,
         // It shows the time that the SS took to do the research
