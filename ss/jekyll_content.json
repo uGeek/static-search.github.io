@@ -4,25 +4,25 @@
 layout: null
 permalink: ss/content.json
 ---
-{% capture pages %}
+{% capture ss_pages %}
 
     {% assign index = "" | split: "" %}
-    {% assign excluded_files = site.tipue_search.exclude.files %}
+    {% assign excluded_files = site.ss.exclude.files %}
     {% assign excluded_taxonomies = "" | split: "" %}
 
 
-    {% for tag in site.tipue_search.exclude.tags %}
+    {% for tag in site.ss.exclude.tags %}
         {% assign excluded_taxonomies = excluded_taxonomies | push: tag | uniq %}
     {% endfor %}
 
 
-    {% for category in site.tipue_search.exclude.categories %}
+    {% for category in site.ss.exclude.categories %}
         {% assign excluded_taxonomies = excluded_taxonomies | push: category | uniq %}
     {% endfor %}
 
 
     {% for post in site.posts %}
-        {% unless post.exclude_from_search == true or excluded_files contains post.path %}
+        {% unless post.ss_exclude == true or excluded_files contains post.path %}
 
             {% assign has_excluded_taxonomy = false %}
 
@@ -46,9 +46,9 @@ permalink: ss/content.json
     {% endfor %}
 
 
-    {% if site.tipue_search.include.pages == true %}
+    {% if site.ss.include.pages == true %}
         {% for page in site.html_pages %}
-            {% unless page.exclude_from_search == true or excluded_files contains page.path %}
+            {% unless page.ss_exclude == true or excluded_files contains page.path %}
                 {% assign has_excluded_taxonomy = false %}
 
                 {% for tag in page.tags %}
@@ -71,11 +71,11 @@ permalink: ss/content.json
     {% endif %}
 
 
-    {% for collection in site.tipue_search.include.collections %}
+    {% for collection in site.ss.include.collections %}
         {% assign documents = site.documents | where:"collection",collection %}
 
         {% for document in documents %}
-            {% unless document.exclude_from_search == true or excluded_files contains document.path %}
+            {% unless document.ss_exclude == true or excluded_files contains document.path %}
                 {% assign has_excluded_taxonomy = false %}
 
                 {% for tag in document.tags %}
@@ -122,4 +122,4 @@ permalink: ss/content.json
 
     {% endfor %}
 
-{% endcapture %}[{{ pages | normalize_whitespace }}]
+{% endcapture %}[{{ ss_pages | normalize_whitespace }}]

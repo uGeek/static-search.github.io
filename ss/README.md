@@ -12,8 +12,8 @@ Once this is done, you will need a form to search and an HTML block to show the 
 
 ```html
 <form>
-	<input type="text" name="ss" id="ss_input">
-	<button type="submit">Search</button>
+    <input type="text" name="ss" id="ss_input">
+    <button type="submit">Search</button>
 </form>
 
 <div id="ss_content"></div>
@@ -34,7 +34,7 @@ Having these two files, simply initialize the plugin according to the selector u
 
 ```html
 <script>
-	$('#ss_input').ss();
+    $('#ss_input').ss();
 </script>
 ```
 
@@ -48,48 +48,48 @@ Below is an example with all options being commented:
 
 ```html
 <script>
-	$('#ss_input').ss({
-		/// Content file location
-		'contentLocation': 'ss/content.json',
-		// Configuration file location
-		'configLocation': 'ss/config.js',
-		// SS language
-		'lang': 'en',
-		// The HTML block ID where results will be shown
-		'contentId': 'ss_content',
-		// Amount of seconds the SS should not re-download configuration, language, and content files
-		'cacheSeconds': 7200,
-		// TODO
-		'contextBuffer': 60,
-		// TODO
-		'contextLength': 60,
-		// TODO
-		'contextStart': 90,
-		// Enables debug mode, showing the score of searches and messages in the browser console
-		'debug': false,
-		// Maximum number of words to be shown in the descriptive text of each item of results
-		'descriptiveWords': 25,
-		// It makes the search word becomes bold in the text description of each item of the results
-		'highlightTerms': true,
-		// Minimum number of characters accepted in search
-		'minimumLength': 3,
-		// The results links should open in a new window
-		'newWindow': false,
-		// Number of items shown on each result page
-		'show': 10,
-		// TODO
-		'showContext': true,
-		// Shows the related searches defined in the config.js file
-		'showRelated': true,
-		// It shows the time that the SS took to do the research
-		'showTime': true,
-		// Shows the amount of results found in the search
-		'showTitleCount': true,
-		// Shows the URL of each result item
-		'showURL': true,
-		// Only exact words are valid for results
-		'wholeWords': true
-	});
+    $('#ss_input').ss({
+        /// Content file location
+        'contentLocation': 'ss/content.json',
+        // Configuration file location
+        'configLocation': 'ss/config.js',
+        // SS language
+        'lang': 'en',
+        // The HTML block ID where results will be shown
+        'contentId': 'ss_content',
+        // Amount of seconds the SS should not re-download configuration, language, and content files
+        'cacheSeconds': 7200,
+        // TODO
+        'contextBuffer': 60,
+        // TODO
+        'contextLength': 60,
+        // TODO
+        'contextStart': 90,
+        // Enables debug mode, showing the score of searches and messages in the browser console
+        'debug': false,
+        // Maximum number of words to be shown in the descriptive text of each item of results
+        'descriptiveWords': 25,
+        // It makes the search word becomes bold in the text description of each item of the results
+        'highlightTerms': true,
+        // Minimum number of characters accepted in search
+        'minimumLength': 3,
+        // The results links should open in a new window
+        'newWindow': false,
+        // Number of items shown on each result page
+        'show': 10,
+        // TODO
+        'showContext': true,
+        // Shows the related searches defined in the config.js file
+        'showRelated': true,
+        // It shows the time that the SS took to do the research
+        'showTime': true,
+        // Shows the amount of results found in the search
+        'showTitleCount': true,
+        // Shows the URL of each result item
+        'showURL': true,
+        // Only exact words are valid for results
+        'wholeWords': true
+    });
 </script>
 ```
 
@@ -112,6 +112,37 @@ The easiest way to generate `content.json` is to use Jekyll. The SS has already 
 Inside the SS folder you will find the `jekyll_content.json` file and opening it will see at the top the `ss/content.json` permalink. You must adapt this value according to the structure of your site.
 
 For example, if the location of the SS on your site is in `/assets/js/ss/`. Then you should set the permalink to `/assets/js/ss/content.json`. This will cause Jekyll to automatically create the index in the same directory as the SS.
+
+#### Including pages and collections
+
+By default, only posts are included in the search index. Pages and collections are not included.
+
+Add the following to `_config.yml` to include pages and collections. `collections` is an array containing a list of collections you want to include.
+
+```yml
+ss:
+  include:
+    pages: true
+    collections: [javascript, php]
+```
+
+#### Excluding from search index
+
+Exclude single documents from the search index with a front-matter variable:
+
+```yml
+ss_exclude: true
+```
+
+Exclude multiple files, tags or categories using a setting in `_config.yml`. `files` is an array containing a list of file paths to be excluded. `tags` and `categories` are arrays containing lists of tags and categories you want to exclude.
+
+```yml
+ss:
+  exclude:
+    files: [search.html, _javascript/localStorage.md, _php/DOMDocument.md]
+    tags: [tag1, tag2]
+    categories: [category1, category2]
+```
 
 ### PHP
 

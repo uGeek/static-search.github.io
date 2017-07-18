@@ -21,9 +21,19 @@ var config = {
                 'related': 'php'
             },
             {
+                'search': 'linux',
+                'after': 'gnu',
+                'related': 'debian'
+            },
+            {
+                'search': 'linux',
+                'after': 'gnu',
+                'related': 'centos'
+            },
+            {
                 'search': 'debian',
                 'after': 'linux',
-                'related': 'kali'
+                'related': 'centos'
             }
         ]
     },
@@ -69,15 +79,15 @@ var config = {
     weight: {
         'weight': [
             {
-                'url': 'https://api.jquery.com',
-                'score': 20
-            },
-            {
-                'url': 'https://www.w3schools.com',
+                'url': 'https://en.wikipedia.org/wiki/Linux',
                 'score': 30
             },
             {
-                'url': 'https://www.debian.org',
+                'url': 'https://en.wikipedia.org/wiki/C_(programming_language)',
+                'score': 40
+            },
+            {
+                'url': 'https://en.wikipedia.org/wiki/GNU_General_Public_License',
                 'score': 50
             }
         ]

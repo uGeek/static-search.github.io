@@ -3,10 +3,14 @@
  * @author   Natan Felles <natanfelles@gmail.com>
  */
 
-// Custom access token
+/**
+ * @var string Custom access token
+ */
 $token = 'ss';
 
-// Custom JSON output
+/**
+ * @var bool Custom JSON output
+ */
 $json_pretty_print = false;
 
 if (php_sapi_name() != 'cli') {
